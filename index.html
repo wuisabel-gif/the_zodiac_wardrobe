@@ -686,26 +686,31 @@ Object.assign(LOOK,deriveLook(hashStr('angeleno')+1));
 
 /* hairstyles — return {back, front} relative to head at (130,72) */
 function buildHair(style,color,glam){
-  const dk=darken(color,.32), shine=glam?`<path d="M114,54 Q130,44 146,54" stroke="${lighten(color,.42)}" stroke-width="3" fill="none" opacity=".55" stroke-linecap="round"/>`:'';
+  const dk=darken(color,.32);
+  const shine=glam?`<path d="M114,52 Q130,43 146,52" stroke="${lighten(color,.42)}" stroke-width="3" fill="none" opacity=".55" stroke-linecap="round"/>`:'';
   const drapeL=`<path d="M107,116 C99,150 103,182 113,188 L120,182 C113,152 113,130 117,118 Z" fill="${color}"/>`;
-  let back='',front=shine;
+  // crown sits OVER the head (drawn after the face) so the scalp never reads as bald
+  const crown=`<path d="M104,74 C101,44 159,44 156,74 C150,55 110,55 104,74 Z" fill="${color}"/>`;
+  let back='',front='';
   if(style==='sleek'){
     back=`<path d="M99,82 C99,46 161,46 161,82 C161,142 158,178 150,182 L110,182 C102,178 99,142 99,82 Z" fill="${color}"/>`;
-    front+=drapeL+`<path d="M130,47 L123,68 M130,47 L137,68" stroke="${dk}" stroke-width="2" fill="none" opacity=".5"/>`;
+    front=crown+drapeL+`<path d="M130,46 L123,66 M130,46 L137,66" stroke="${dk}" stroke-width="2" fill="none" opacity=".4"/>`;
   }else if(style==='bob'){
     back=`<path d="M103,80 C103,48 157,48 157,80 C157,112 150,126 143,128 L117,128 C110,126 103,112 103,80 Z" fill="${color}"/>`;
-    front+=`<path d="M130,47 L124,66 M130,47 L136,66" stroke="${dk}" stroke-width="2" fill="none" opacity=".45"/>`;
+    front=crown;
   }else if(style==='bun'){
-    back=`<path d="M104,78 C100,48 160,48 156,78 C150,62 110,62 104,78 Z" fill="${color}"/><ellipse cx="130" cy="41" rx="14" ry="12" fill="${color}"/><ellipse cx="130" cy="41" rx="14" ry="12" fill="none" stroke="${dk}" stroke-width="1.4" opacity=".4"/>`;
+    back=`<ellipse cx="130" cy="40" rx="14" ry="12" fill="${color}"/><ellipse cx="130" cy="40" rx="14" ry="12" fill="none" stroke="${dk}" stroke-width="1.4" opacity=".4"/>`;
+    front=crown;
   }else if(style==='curls'){
-    back=`<g fill="${color}"><circle cx="108" cy="60" r="18"/><circle cx="130" cy="45" r="20"/><circle cx="152" cy="60" r="18"/><circle cx="100" cy="86" r="16"/><circle cx="160" cy="86" r="16"/><circle cx="106" cy="116" r="14"/><circle cx="154" cy="116" r="14"/><circle cx="130" cy="39" r="15"/></g>`;
-    front+=`<circle cx="116" cy="55" r="9" fill="${color}"/><circle cx="144" cy="55" r="9" fill="${color}"/><circle cx="110" cy="150" r="12" fill="${color}"/><circle cx="112" cy="172" r="11" fill="${color}"/>`;
+    back=`<g fill="${color}"><circle cx="108" cy="60" r="18"/><circle cx="130" cy="46" r="19"/><circle cx="152" cy="60" r="18"/><circle cx="100" cy="86" r="16"/><circle cx="160" cy="86" r="16"/><circle cx="106" cy="116" r="14"/><circle cx="154" cy="116" r="14"/></g>`;
+    front=`<g fill="${color}"><circle cx="115" cy="52" r="13"/><circle cx="130" cy="46" r="14"/><circle cx="145" cy="52" r="13"/><circle cx="110" cy="150" r="12"/><circle cx="112" cy="172" r="11"/></g>`;
   }else if(style==='crop'){
-    back=`<path d="M105,74 C103,49 157,49 155,74 C150,60 110,60 105,74 Z" fill="${color}"/>`;
-    front+=`<path d="M116,52 q14,-8 28,0" stroke="${dk}" stroke-width="2" fill="none" opacity=".35"/>`;
+    front=crown+`<path d="M116,52 q14,-7 28,0" stroke="${dk}" stroke-width="2" fill="none" opacity=".3"/>`;
   }else{ // ponytail
-    back=`<path d="M105,74 C103,49 157,49 155,74 C150,60 110,60 105,74 Z" fill="${color}"/><path d="M152,64 C180,82 182,134 170,176 C162,150 156,118 148,92 Z" fill="${color}"/><ellipse cx="151" cy="66" rx="6" ry="5" fill="${dk}"/>`;
+    back=`<path d="M153,66 C181,84 183,134 171,176 C163,150 157,118 149,94 Z" fill="${color}"/>`;
+    front=crown+`<ellipse cx="150" cy="68" rx="6" ry="5" fill="${dk}"/>`;
   }
+  front+=shine;
   return {back,front};
 }
 
@@ -726,13 +731,13 @@ function buildFigure(sign){
   const shoe=(wet||b==='cool'||b==='cold')?'boots':(b==='hot'?'sandals':'sneakers');
   const sunnies=clear, hat=b==='hot'&&clear, scarf=b==='cool'||b==='cold', bag=b==='hot';
 
-  /* proportion anchors (balanced ~7.5 heads; legs ≈ torso) */
+  /* proportion anchors — hip sits at the vertical midpoint so torso ≈ legs */
   const C=130;
-  const SHO=112;              // shoulder / torso top
-  const WAI=250;             // bodice hem
-  const HIP=254;             // legs origin
-  const WR=242, HND=246;     // wrist, hand
-  const L=440;               // feet baseline
+  const SHO=112;             // shoulder / torso top
+  const WAI=230;             // bodice hem
+  const HIP=234;             // legs origin (≈ midpoint of head-top→feet)
+  const WR=226, HND=230;     // wrist, hand (rest at the hip)
+  const L=424;               // feet baseline
   const shadowY=L+18, vbH=L+34;
   const coatLen=buttoned?HIP+162:(b==='cool'?HIP+108:HIP+50);
   const shortsBot=HIP+76, bootTop=L-56;
@@ -761,7 +766,7 @@ function buildFigure(sign){
   if(shoe==='boots'){
     s+=tube(117,bootTop,116,L-2,21,'#26212e')+tube(143,bootTop,144,L-2,21,'#26212e');
     s+=`<ellipse cx="112" cy="${L+2}" rx="15" ry="8" fill="#26212e"/><ellipse cx="148" cy="${L+2}" rx="15" ry="8" fill="#26212e"/>`;
-    if(glam) s+=`<rect x="118" y="${L+5}" width="4" height="14" fill="#26212e"/><rect x="138" y="${L+5}" width="4" height="14" fill="#26212e"/>`;
+    if(glam) s+=`<rect x="119" y="${L+4}" width="4" height="8" rx="1" fill="#26212e"/><rect x="137" y="${L+4}" width="4" height="8" rx="1" fill="#26212e"/>`;
   }else if(shoe==='sneakers'){
     if(glam){ const m=darken(accent,.08);
       s+=`<path d="M102,${L-3} q-9,14 6,16 l26,2 q6,0 5,-7 q-2,-8 -9,-10 Z" fill="${m}"/>`;
@@ -774,7 +779,7 @@ function buildFigure(sign){
     s+=`<ellipse cx="113" cy="${L+2}" rx="12" ry="5" fill="${darken(skin,.16)}"/><ellipse cx="147" cy="${L+2}" rx="12" ry="5" fill="${darken(skin,.16)}"/>`;
     s+=`<path d="M105,${L} l16,-5 M107,${L+4} l14,-2" stroke="${accent}" stroke-width="3" stroke-linecap="round" fill="none"/>`;
     s+=`<path d="M139,${L} l16,5 M139,${L+4} l14,2" stroke="${accent}" stroke-width="3" stroke-linecap="round" fill="none"/>`;
-    if(glam) s+=`<path d="M120,${L+4} l-2,15 l4,0 l1,-14 Z" fill="${darken(accent,.2)}"/><path d="M140,${L+4} l2,15 l-4,0 l-1,-14 Z" fill="${darken(accent,.2)}"/>`;
+    if(glam) s+=`<path d="M120,${L+4} l-1,9 l3,0 l1,-8 Z" fill="${darken(accent,.2)}"/><path d="M140,${L+4} l1,9 l-3,0 l-1,-8 Z" fill="${darken(accent,.2)}"/>`;
   }
 
   // neck
