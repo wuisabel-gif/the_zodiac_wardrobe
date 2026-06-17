@@ -1,0 +1,1060 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Zodiac Wardrobe — Dress by the LA Sky &amp; Your Sign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#241d33;
+    --ink-soft:#5a5170;
+    --parch:#f4ecdb;
+    --parch-edge:#e7dcc4;
+    --gold:#c79a3e;
+    --gold-bright:#e7c46f;
+    --twilight-1:#15101f;
+    --twilight-2:#241a36;
+    --line:rgba(36,29,51,.18);
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Jost',system-ui,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:
+      radial-gradient(120% 80% at 50% -10%, #2c2140 0%, var(--twilight-1) 55%, #0d0916 100%);
+    color:var(--parch);
+    font-family:var(--sans);
+    line-height:1.55;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+  a{color:inherit}
+
+  .wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+
+  /* ---------- Masthead ---------- */
+  .masthead{padding:34px 0 18px;text-align:center}
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:.66rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--gold-bright);
+    display:flex;align-items:center;justify-content:center;gap:14px;
+  }
+  .eyebrow::before,.eyebrow::after{
+    content:"";height:1px;width:46px;background:linear-gradient(90deg,transparent,var(--gold));
+  }
+  .eyebrow::after{background:linear-gradient(90deg,var(--gold),transparent)}
+  .masthead h1{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(2.5rem,7vw,4.6rem);
+    letter-spacing:-.01em;
+    line-height:.98;
+    margin:.18em 0 .12em;
+  }
+  .masthead h1 em{font-style:italic;color:var(--gold-bright)}
+  .dateline{
+    font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+    color:rgba(244,236,219,.62);
+  }
+
+  /* ---------- Hero sky ---------- */
+  .sky-frame{
+    position:relative;margin:26px 0 0;border-radius:18px;overflow:hidden;
+    border:1px solid rgba(231,196,111,.28);
+    box-shadow:0 30px 80px -30px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.04);
+  }
+  .sky-frame svg{display:block;width:100%;height:auto}
+  .sky-readout{
+    position:absolute;left:26px;bottom:22px;right:26px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:18px;
+    pointer-events:none;
+  }
+  .temp-big{
+    font-family:var(--serif);font-weight:300;
+    font-size:clamp(3.2rem,11vw,6.4rem);line-height:.85;
+    text-shadow:0 4px 30px rgba(0,0,0,.55);
+  }
+  .temp-big sup{font-size:.34em;vertical-align:super;font-weight:400}
+  .cond-block{text-align:left}
+  .cond-name{font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,3.4vw,1.7rem)}
+  .cond-meta{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,236,219,.7);margin-top:4px}
+  .loc-tag{
+    position:absolute;top:18px;left:22px;
+    font-size:.64rem;letter-spacing:.34em;text-transform:uppercase;
+    color:rgba(244,236,219,.78);
+    display:flex;align-items:center;gap:8px;
+  }
+  .loc-dot{width:6px;height:6px;border-radius:50%;background:var(--gold-bright);box-shadow:0 0 10px var(--gold-bright)}
+
+  /* ---------- Sign picker ---------- */
+  .picker{margin:40px 0 6px;text-align:center}
+  .section-label{
+    font-size:.66rem;letter-spacing:.36em;text-transform:uppercase;color:var(--gold-bright);
+    margin-bottom:16px;
+  }
+  .signs{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:10px;max-width:760px;margin:0 auto;
+  }
+  .sign-chip{
+    appearance:none;border:1px solid rgba(231,196,111,.22);
+    background:rgba(244,236,219,.03);
+    color:var(--parch);border-radius:12px;padding:13px 6px 10px;cursor:pointer;
+    font-family:var(--sans);transition:transform .18s ease,border-color .2s,background .2s;
+    display:flex;flex-direction:column;align-items:center;gap:3px;
+  }
+  .sign-chip .glyph{font-family:var(--serif);font-size:1.45rem;line-height:1;color:var(--gold-bright)}
+  .sign-chip .nm{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,236,219,.72)}
+  .sign-chip:hover{transform:translateY(-3px);border-color:rgba(231,196,111,.55);background:rgba(231,196,111,.08)}
+  .sign-chip:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+  .sign-chip[aria-pressed="true"]{
+    background:linear-gradient(180deg,rgba(231,196,111,.22),rgba(231,196,111,.06));
+    border-color:var(--gold-bright);
+    box-shadow:0 8px 24px -10px rgba(231,196,111,.5);
+  }
+  .sign-chip[aria-pressed="true"] .nm{color:var(--parch)}
+
+  /* ---------- Reading card ---------- */
+  .reading{
+    margin:34px 0 30px;background:var(--parch);color:var(--ink);
+    border-radius:16px;padding:0;overflow:hidden;
+    box-shadow:0 40px 90px -40px rgba(0,0,0,.8);
+    border:1px solid var(--parch-edge);
+  }
+  .reading-head{
+    padding:30px 34px 22px;border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(140% 120% at 90% 0%, rgba(199,154,62,.12), transparent 60%);
+    position:relative;
+  }
+  .reading-head .stamp{
+    position:absolute;top:24px;right:30px;
+    width:62px;height:62px;border:1px solid var(--gold);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:1.9rem;color:var(--gold);
+    background:rgba(199,154,62,.06);
+  }
+  .reading-head .kicker{
+    font-size:.64rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:6px;
+  }
+  .reading-head h2{
+    font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,5vw,2.9rem);
+    margin:.04em 0 .12em;letter-spacing:-.01em;line-height:1.02;
+  }
+  .reading-head .sub{
+    font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .directive{
+    font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2.6vw,1.35rem);
+    color:var(--ink);max-width:62ch;margin:16px 0 2px;line-height:1.4;
+  }
+
+  .reading-body{display:grid;grid-template-columns:minmax(190px,.95fr) 1.15fr .95fr;gap:0}
+  .col-figure{padding:22px 18px;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;background:radial-gradient(120% 80% at 50% 0%,rgba(199,154,62,.07),transparent 70%)}
+  .figure-panel{width:100%;border-radius:13px;overflow:hidden;position:relative;border:1px solid var(--parch-edge)}
+  .figure-panel svg{display:block;width:100%;height:auto}
+  .figure-cap{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin-top:12px;text-align:center}
+
+  .fig-controls{width:100%;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+  .fc-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .fc-lab{font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);width:38px;flex:none}
+  .fc-pills{justify-content:center;gap:0;border:1px solid var(--parch-edge);border-radius:999px;padding:3px;background:#fff}
+  .pill{flex:1;appearance:none;border:none;background:transparent;color:var(--ink-soft);
+    font-family:var(--sans);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+    padding:7px 4px;border-radius:999px;cursor:pointer;transition:.18s}
+  .pill.on{background:var(--ink);color:var(--parch)}
+  .dots{display:flex;gap:6px;flex-wrap:wrap}
+  .dot{width:19px;height:19px;border-radius:50%;border:1px solid rgba(0,0,0,.14);cursor:pointer;padding:0;
+    transition:transform .15s,box-shadow .15s;position:relative}
+  .dot:hover{transform:scale(1.12)}
+  .dot.on{box-shadow:0 0 0 2px var(--parch),0 0 0 3.5px var(--gold)}
+  .fc-cycle{margin-left:auto;appearance:none;border:1px solid var(--parch-edge);background:#fff;color:var(--ink);
+    font-family:var(--sans);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+    padding:6px 11px;border-radius:999px;cursor:pointer;transition:.18s}
+  .fc-cycle:hover{border-color:var(--gold);color:var(--gold)}
+  .fc-surprise{appearance:none;border:1px solid var(--gold);background:linear-gradient(180deg,rgba(199,154,62,.1),rgba(199,154,62,.02));
+    color:var(--gold);font-family:var(--serif);font-style:italic;font-size:.92rem;
+    padding:9px;border-radius:10px;cursor:pointer;margin-top:2px;transition:.18s}
+  .fc-surprise:hover{background:var(--gold);color:#fff}
+  .pill:focus-visible,.dot:focus-visible,.fc-cycle:focus-visible,.fc-surprise:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .col-look{padding:26px 30px 30px;border-right:1px solid var(--line)}
+  .col-side{padding:26px 28px 30px}
+
+  /* shop the look */
+  .shop{border-top:1px solid var(--line);padding:26px 34px 30px;
+    background:radial-gradient(140% 120% at 10% 0%,rgba(199,154,62,.08),transparent 55%)}
+  .shop-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+  .shop-head-l{min-width:0}
+  .shop-sub{font-size:.72rem;color:var(--ink-soft);max-width:48ch;margin-top:4px}
+  .shop-filter{display:flex;gap:0;border:1px solid var(--parch-edge);border-radius:999px;padding:3px;background:#fff;flex:none}
+  .shop-pill{appearance:none;border:none;background:transparent;color:var(--ink-soft);cursor:pointer;
+    font-family:var(--sans);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+    padding:6px 11px;border-radius:999px;transition:.16s;white-space:nowrap}
+  .shop-pill.on{background:var(--ink);color:var(--parch)}
+  .shop-pill:focus-visible,.store-chip:focus-visible,.shop-row:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  .shop-stores{display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+    padding:0 0 16px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+  .shop-stores .lab{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-right:4px}
+  .store-chip{appearance:none;border:1px solid var(--parch-edge);background:#fff;color:var(--ink-soft);cursor:pointer;
+    font-family:var(--sans);font-size:.68rem;letter-spacing:.03em;padding:6px 12px;border-radius:999px;transition:.16s;white-space:nowrap}
+  .store-chip:hover{border-color:var(--gold);color:var(--gold)}
+  .store-chip.on{background:var(--ink);color:var(--parch);border-color:var(--ink)}
+
+  .shop-list{display:flex;flex-direction:column}
+  .shop-row{display:flex;align-items:baseline;gap:14px;padding:13px 6px;text-decoration:none;
+    color:var(--ink);border-bottom:1px dashed var(--line);transition:background .15s,padding .15s}
+  .shop-row:last-child{border-bottom:none}
+  .shop-row:hover{background:rgba(199,154,62,.07);border-radius:9px;padding-left:12px}
+  .shop-piece{font-family:var(--serif);font-size:1.05rem;line-height:1.2;flex:none;min-width:130px}
+  .shop-q{font-size:.76rem;color:var(--ink-soft);font-style:italic;flex:1;min-width:0;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .shop-go{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);
+    flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+  .shop-row:hover .shop-go{color:var(--ink)}
+  @media (max-width:760px){
+    .shop{padding:22px}
+    .shop-row{flex-wrap:wrap;gap:4px 12px}
+    .shop-piece{min-width:0;width:100%}
+    .shop-q{flex:1}
+  }
+  .mini-label{
+    font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:14px;
+  }
+  .look-list{list-style:none;margin:0 0 4px;padding:0;counter-reset:p}
+  .look-list li{
+    counter-increment:p;position:relative;padding:13px 0 13px 40px;
+    border-bottom:1px dashed var(--line);font-size:1rem;color:#34293f;
+  }
+  .look-list li:last-child{border-bottom:none}
+  .look-list li::before{
+    content:"0"counter(p);position:absolute;left:0;top:13px;
+    font-family:var(--serif);font-size:.82rem;color:var(--gold);letter-spacing:.04em;
+  }
+  .look-list li b{font-weight:500;color:var(--ink)}
+
+  .palette{display:flex;gap:0;border-radius:9px;overflow:hidden;border:1px solid var(--parch-edge);margin-bottom:8px}
+  .swatch{flex:1;height:54px;position:relative}
+  .pal-names{display:flex;flex-direction:column;gap:7px;margin-top:12px}
+  .pal-names span{font-size:.78rem;color:var(--ink-soft);display:flex;align-items:center;gap:9px}
+  .pal-names i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.12)}
+
+  .side-block{margin-bottom:24px}
+  .side-block:last-child{margin-bottom:0}
+  .note{font-size:.92rem;color:#3c324c;line-height:1.55}
+  .note.script{font-family:var(--serif);font-style:italic;font-size:1.02rem;color:var(--ink)}
+  .accessory-line{
+    display:flex;align-items:baseline;gap:8px;font-size:.95rem;color:#34293f;
+    padding:9px 0;border-bottom:1px dashed var(--line);
+  }
+  .accessory-line:last-child{border-bottom:none}
+  .accessory-line b{font-weight:500}
+
+  .elem-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+    border:1px solid var(--gold);border-radius:999px;padding:5px 13px;
+  }
+
+  footer{
+    text-align:center;padding:14px 0 50px;color:rgba(244,236,219,.45);
+    font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;
+  }
+  footer .star{color:var(--gold-bright)}
+
+  /* loading shimmer */
+  .loading .temp-big{opacity:.4}
+
+  @media (max-width:980px){
+    .reading-body{grid-template-columns:1fr}
+    .col-figure{border-right:none;border-bottom:1px solid var(--line)}
+    .figure-panel{max-width:300px;margin:0 auto}
+    .col-look{border-right:none;border-bottom:1px solid var(--line)}
+  }
+  @media (max-width:720px){
+    .signs{grid-template-columns:repeat(4,1fr)}
+    .reading-body{grid-template-columns:1fr}
+    .col-look{border-right:none;border-bottom:1px solid var(--line)}
+    .sky-readout{left:18px;right:18px;bottom:16px}
+    .reading-head .stamp{width:50px;height:50px;font-size:1.5rem;top:20px;right:22px}
+    .reading-head{padding:24px 22px 18px}
+    .col-look,.col-side{padding:22px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+  .twinkle{animation:tw 3.4s ease-in-out infinite}
+  @keyframes tw{0%,100%{opacity:.35}50%{opacity:1}}
+  .fade-up{animation:fu .6s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Los Angeles &middot; Dress by the sky and the stars</div>
+    <h1>The Zodiac <em>Wardrobe</em></h1>
+    <div class="dateline" id="dateline">—</div>
+  </header>
+
+  <section class="sky-frame loading" aria-label="Today's Los Angeles sky">
+    <div class="loc-tag"><span class="loc-dot"></span> Los Angeles, CA</div>
+    <div id="sky-svg"></div>
+    <div class="sky-readout">
+      <div class="temp-big" id="temp"><sup></sup>—<sup>°</sup></div>
+      <div class="cond-block">
+        <div class="cond-name" id="cond">Reading the sky…</div>
+        <div class="cond-meta" id="condmeta">High — · Low — · Feels —</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="picker">
+    <div class="section-label">Choose your sign</div>
+    <div class="signs" id="signs"></div>
+  </section>
+
+  <main id="reading-mount"></main>
+
+  <footer>
+    Sky readings live from Los Angeles <span class="star">✦</span> Styling is for delight, not destiny
+  </footer>
+
+</div>
+
+<script>
+/* ----------------------------------------------------------
+   1. ZODIAC DATA — fashion personality per sign
+---------------------------------------------------------- */
+const SIGNS = [
+  { key:'aries', name:'Aries', glyph:'♈', dates:[3,21,4,19], element:'Fire',
+    vibe:'bold and a little reckless',
+    fabric:'crisp poplin', hero:'a scarlet statement jacket', accessory:'gold hoop earrings',
+    palette:[['#c0392b','Crimson'],['#e8743b','Ember'],['#f2d0c4','Blush sand']],
+    philosophy:'Wear the thing that makes you walk faster. Confidence is your best tailoring.' },
+  { key:'taurus', name:'Taurus', glyph:'♉', dates:[4,20,5,20], element:'Earth',
+    vibe:'sensual and unhurried',
+    fabric:'brushed silk', hero:'a buttery suede overshirt', accessory:'a single signet ring',
+    palette:[['#6b8e5a','Olive grove'],['#d8c7a3','Wheat'],['#9c6b4a','Toasted clay']],
+    philosophy:'Choose fabrics you want to be touched by. Comfort and luxury are the same word.' },
+  { key:'gemini', name:'Gemini', glyph:'♊', dates:[5,21,6,20], element:'Air',
+    vibe:'playful and double-minded',
+    fabric:'lightweight cotton', hero:'a contrast-print shirt', accessory:'mismatched earrings',
+    palette:[['#f4c531','Sun yellow'],['#3aa6b9','Pool blue'],['#e87fb0','Bubblegum']],
+    philosophy:'Pick two looks and refuse to choose. The mix is the message.' },
+  { key:'cancer', name:'Cancer', glyph:'♋', dates:[6,21,7,22], element:'Water',
+    vibe:'soft and nostalgic',
+    fabric:'washed linen', hero:'a heirloom cardigan', accessory:'a pearl pendant',
+    palette:[['#b8c9d8','Moonlight'],['#e9e2d0','Cream shell'],['#8d9bb5','Tide grey']],
+    philosophy:'Dress like a memory. The pieces that feel like home photograph best.' },
+  { key:'leo', name:'Leo', glyph:'♌', dates:[7,23,8,22], element:'Fire',
+    vibe:'glamorous and sun-worshipping',
+    fabric:'liquid satin', hero:'a gold-buttoned blazer', accessory:'oversized sunglasses',
+    palette:[['#d4a017','Liquid gold'],['#e2622b','Sunset'],['#7b2d26','Garnet']],
+    philosophy:'You are the main character; dress accordingly. Shine first, ask questions later.' },
+  { key:'virgo', name:'Virgo', glyph:'♍', dates:[8,23,9,22], element:'Earth',
+    vibe:'precise and quietly perfect',
+    fabric:'fine merino', hero:'an immaculate trench', accessory:'a slim leather watch',
+    palette:[['#8a8067','Khaki'],['#e6e2d6','Oat'],['#4f5648','Sage shadow']],
+    philosophy:'Edit until nothing is extra. The most striking outfit is the most considered one.' },
+  { key:'libra', name:'Libra', glyph:'♎', dates:[9,23,10,22], element:'Air',
+    vibe:'romantic and impeccably balanced',
+    fabric:'draped chiffon', hero:'a wrap dress', accessory:'a delicate gold chain',
+    palette:[['#e8c1cf','Petal'],['#c8a4cf','Lilac'],['#d9cdb6','Champagne']],
+    philosophy:'Symmetry is your love language. One soft piece, one structured — let them harmonize.' },
+  { key:'scorpio', name:'Scorpio', glyph:'♏', dates:[10,23,11,21], element:'Water',
+    vibe:'magnetic and a touch dangerous',
+    fabric:'matte leather', hero:'a sharp-shouldered black coat', accessory:'a thin choker',
+    palette:[['#1c1b22','Ink'],['#6e1d2a','Oxblood'],['#3a4a54','Storm teal']],
+    philosophy:'Say everything in monochrome. Mystery is the most expensive accessory.' },
+  { key:'sagittarius', name:'Sagittarius', glyph:'♐', dates:[11,22,12,21], element:'Fire',
+    vibe:'free-roaming and sun-chasing',
+    fabric:'soft denim', hero:'an embroidered traveler\u2019s jacket', accessory:'a stack of beaded bangles',
+    palette:[['#b5552e','Rust'],['#2f8f8a','Turquoise'],['#e6c98a','Desert gold']],
+    philosophy:'Dress for the road you might take by accident. Pockets and good shoes always.' },
+  { key:'capricorn', name:'Capricorn', glyph:'♑', dates:[12,22,1,19], element:'Earth',
+    vibe:'commanding and classic',
+    fabric:'structured wool', hero:'a camel power coat', accessory:'a tonal leather belt',
+    palette:[['#3b3a40','Charcoal'],['#b79468','Camel'],['#d9d3c8','Stone']],
+    philosophy:'Buy once, wear forever. Authority is just tailoring that fits exactly right.' },
+  { key:'aquarius', name:'Aquarius', glyph:'♒', dates:[1,20,2,18], element:'Air',
+    vibe:'eccentric and ahead of schedule',
+    fabric:'technical nylon', hero:'a metallic statement piece', accessory:'futuristic shield shades',
+    palette:[['#2c6fd6','Electric blue'],['#c9ccd4','Chrome'],['#7a5bd1','Ultraviolet']],
+    philosophy:'Wear the thing nobody else would dare. The future is a personal dress code.' },
+  { key:'pisces', name:'Pisces', glyph:'♓', dates:[2,19,3,20], element:'Water',
+    vibe:'dreamy and weightless',
+    fabric:'gauzy voile', hero:'a fluid maxi layer', accessory:'an iridescent shell pendant',
+    palette:[['#9fd0c5','Seafoam'],['#c7b9e0','Lilac mist'],['#dfe8ea','Sea glass']],
+    philosophy:'Let everything float. Dress like the tide and trust the soft pieces.' },
+];
+
+/* ----------------------------------------------------------
+   2. CONSTELLATIONS — stylized, normalized 0..1
+---------------------------------------------------------- */
+const CONST = {
+  aries:{pts:[[.1,.55],[.4,.4],[.7,.45],[.9,.3]],lines:[[0,1],[1,2],[2,3]]},
+  taurus:{pts:[[.15,.2],[.4,.5],[.55,.6],[.7,.5],[.9,.18],[.5,.85]],lines:[[0,1],[1,2],[2,3],[3,4],[2,5]]},
+  gemini:{pts:[[.2,.15],[.25,.85],[.45,.2],[.5,.9],[.7,.25],[.75,.8]],lines:[[0,1],[2,3],[4,5],[0,2],[2,4],[1,3],[3,5]]},
+  cancer:{pts:[[.5,.15],[.5,.5],[.25,.8],[.75,.8],[.5,.5]],lines:[[0,1],[1,2],[1,3]]},
+  leo:{pts:[[.12,.6],[.25,.4],[.35,.28],[.5,.32],[.62,.55],[.85,.7],[.7,.85]],lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[4,6]]},
+  virgo:{pts:[[.1,.3],[.3,.45],[.5,.4],[.55,.65],[.75,.6],[.9,.78]],lines:[[0,1],[1,2],[2,3],[2,4],[4,5]]},
+  libra:{pts:[[.5,.18],[.2,.5],[.8,.5],[.3,.82],[.72,.82]],lines:[[0,1],[0,2],[1,3],[2,4]]},
+  scorpio:{pts:[[.12,.3],[.28,.35],[.44,.4],[.58,.5],[.7,.66],[.78,.82],[.66,.9],[.55,.78]],lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7]]},
+  sagittarius:{pts:[[.2,.7],[.3,.4],[.5,.35],[.6,.6],[.4,.62],[.75,.3],[.85,.55]],lines:[[0,1],[1,2],[2,3],[3,4],[4,0],[2,5],[3,6]]},
+  capricorn:{pts:[[.15,.4],[.5,.25],[.85,.45],[.6,.8],[.3,.7]],lines:[[0,1],[1,2],[2,3],[3,4],[4,0]]},
+  aquarius:{pts:[[.1,.4],[.28,.55],[.42,.4],[.58,.55],[.72,.4],[.9,.55]],lines:[[0,1],[1,2],[2,3],[3,4],[4,5]]},
+  pisces:{pts:[[.1,.3],[.3,.45],[.5,.55],[.7,.45],[.9,.3],[.5,.55],[.5,.85]],lines:[[0,1],[1,2],[2,3],[3,4],[2,6]]},
+};
+
+/* ----------------------------------------------------------
+   3. WEATHER — Open-Meteo (live, no key) + graceful fallback
+---------------------------------------------------------- */
+function codeToCondition(c){
+  if(c===0||c===1) return 'clear';
+  if(c===2||c===3) return 'clouds';
+  if(c===45||c===48) return 'fog';
+  if((c>=51&&c<=67)||(c>=80&&c<=82)) return 'rain';
+  if((c>=71&&c<=77)||c===85||c===86) return 'snow';
+  if(c>=95) return 'storm';
+  return 'clear';
+}
+const CONDLABEL={clear:'Clear & sun-drenched',clouds:'Partly cloudy',fog:'Soft marine layer',
+  rain:'Rain over the city',snow:'Snow (a true rarity)',storm:'Thunder rolling in'};
+
+let WX = { tempF:74, feelsF:74, hi:78, lo:60, condition:'clear', isDay:1, hour:12 };
+
+async function loadWeather(){
+  try{
+    const url='https://api.open-meteo.com/v1/forecast?latitude=34.0522&longitude=-118.2437'+
+      '&current=temperature_2m,weather_code,is_day,apparent_temperature'+
+      '&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=America/Los_Angeles';
+    const r=await fetch(url);
+    if(!r.ok) throw new Error('bad');
+    const d=await r.json();
+    WX.tempF=Math.round(d.current.temperature_2m);
+    WX.feelsF=Math.round(d.current.apparent_temperature);
+    WX.hi=Math.round(d.daily.temperature_2m_max[0]);
+    WX.lo=Math.round(d.daily.temperature_2m_min[0]);
+    WX.condition=codeToCondition(d.current.weather_code);
+    WX.isDay=d.current.is_day;
+  }catch(e){ /* keep pleasant LA fallback */ }
+  // LA local hour
+  try{
+    WX.hour=parseInt(new Intl.DateTimeFormat('en-US',{hour:'numeric',hour12:false,timeZone:'America/Los_Angeles'}).format(new Date()),10);
+  }catch(e){ WX.hour=new Date().getHours(); }
+  renderSky(); renderWeatherText(); if(currentSign) renderReading(currentSign);
+}
+
+/* ----------------------------------------------------------
+   4. SKY RENDER
+---------------------------------------------------------- */
+function timeOfDay(){
+  if(!WX.isDay) return 'night';
+  if(WX.hour>=17) return 'golden';
+  if(WX.hour<7) return 'dawn';
+  return 'day';
+}
+const GRADS={
+  day:    ['#6f9bd1','#a9c0dd','#f4d6ad'],
+  dawn:   ['#5a557e','#cf8f8c','#f3c98f'],
+  golden: ['#3a2a55','#c8627a','#f4a85f'],
+  night:  ['#120e22','#241a3e','#3a2c54'],
+  cloudOverlay:'#aeb4c2',
+};
+
+function renderSky(){
+  const W=1000,H=500;
+  const tod=timeOfDay();
+  let g=GRADS[tod].slice();
+  if(WX.condition==='clouds'){ g=[blend(g[0],GRADS.cloudOverlay,.35),blend(g[1],GRADS.cloudOverlay,.4),blend(g[2],GRADS.cloudOverlay,.3)]; }
+  if(WX.condition==='rain'||WX.condition==='storm'||WX.condition==='fog'){
+    g=['#39414e','#586070','#828a98'];
+    if(tod==='night') g=['#1b2028','#2c333f','#444c5a'];
+  }
+  const night = tod==='night';
+  const sel = currentSign ? currentSign.key : 'leo';
+  const con = CONST[sel];
+
+  // background stars
+  let stars='';
+  const sd=[[.08,.18],[.16,.34],[.05,.5],[.22,.12],[.3,.28],[.12,.66],[.38,.2],
+            [.46,.42],[.52,.14],[.6,.3],[.18,.8],[.28,.55],[.07,.86],[.4,.7]];
+  sd.forEach((s,i)=>{
+    const op = night?(.5+Math.random()*.5):(.12);
+    stars+=`<circle cx="${s[0]*W}" cy="${s[1]*H*.8}" r="${1+(i%3)*.5}" fill="#fff" opacity="${op}" class="${night?'twinkle':''}" style="animation-delay:${i*.3}s"/>`;
+  });
+
+  // sun or moon
+  let orb='';
+  if(WX.isDay && WX.condition!=='rain' && WX.condition!=='storm'){
+    const cx=180,cy=130,col=tod==='golden'?'#ffd27a':(tod==='dawn'?'#ffd9b0':'#fff4d6');
+    let rays='';
+    if(WX.condition==='clear'){
+      for(let a=0;a<12;a++){const ang=a*Math.PI/6;rays+=`<line x1="${cx+Math.cos(ang)*52}" y1="${cy+Math.sin(ang)*52}" x2="${cx+Math.cos(ang)*72}" y2="${cy+Math.sin(ang)*72}" stroke="${col}" stroke-width="3" stroke-linecap="round" opacity=".5"/>`;}
+    }
+    orb=`<circle cx="${cx}" cy="${cy}" r="80" fill="${col}" opacity=".22"/>
+         <circle cx="${cx}" cy="${cy}" r="40" fill="${col}"/>${rays}`;
+  } else if(!WX.isDay){
+    const cx=180,cy=120;
+    orb=`<circle cx="${cx}" cy="${cy}" r="64" fill="#fef9e7" opacity=".15"/>
+         <circle cx="${cx}" cy="${cy}" r="34" fill="#fef9e7"/>
+         <circle cx="${cx+13}" cy="${cy-6}" r="34" fill="${night?'#241a3e':'#39414e'}"/>`;
+  }
+
+  // clouds
+  let clouds='';
+  if(WX.condition==='clouds'||WX.condition==='fog'||WX.condition==='rain'||WX.condition==='storm'){
+    const cl=(x,y,s,o)=>`<g opacity="${o}" transform="translate(${x},${y}) scale(${s})"><ellipse cx="0" cy="0" rx="60" ry="34" fill="#fff"/><ellipse cx="48" cy="8" rx="46" ry="28" fill="#fff"/><ellipse cx="-46" cy="10" rx="42" ry="26" fill="#fff"/></g>`;
+    clouds = cl(300,110,1,.5)+cl(640,80,1.25,.42)+cl(820,170,.85,.4);
+  }
+  // rain
+  let rain='';
+  if(WX.condition==='rain'||WX.condition==='storm'){
+    for(let i=0;i<46;i++){const x=Math.random()*W,y=Math.random()*H;rain+=`<line x1="${x}" y1="${y}" x2="${x-7}" y2="${y+20}" stroke="#cdd6e2" stroke-width="1.4" opacity=".5"/>`;}
+  }
+
+  // constellation (gold) — placed upper-right region
+  const bx=560,by=70,bw=380,bh=250;
+  let cl='',cs='';
+  con.lines.forEach(([a,b])=>{
+    const p=con.pts[a],q=con.pts[b];
+    cl+=`<line x1="${bx+p[0]*bw}" y1="${by+p[1]*bh}" x2="${bx+q[0]*bw}" y2="${by+q[1]*bh}" stroke="#e7c46f" stroke-width="1.6" opacity="${night?.85:.7}"/>`;
+  });
+  con.pts.forEach((p,i)=>{
+    const X=bx+p[0]*bw,Y=by+p[1]*bh;
+    cs+=`<circle cx="${X}" cy="${Y}" r="6" fill="#e7c46f" opacity=".25"/>
+         <circle cx="${X}" cy="${Y}" r="2.6" fill="#fff4d6" class="twinkle" style="animation-delay:${i*.25}s"/>`;
+  });
+  const conLabel = currentSign ? currentSign.name.toUpperCase() : '';
+
+  const svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${CONDLABEL[WX.condition]} over Los Angeles">
+    <defs>
+      <linearGradient id="skyg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="${g[0]}"/>
+        <stop offset="55%" stop-color="${g[1]}"/>
+        <stop offset="100%" stop-color="${g[2]}"/>
+      </linearGradient>
+      <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#000" stop-opacity="0"/>
+        <stop offset="1" stop-color="#000" stop-opacity=".4"/>
+      </linearGradient>
+    </defs>
+    <rect width="${W}" height="${H}" fill="url(#skyg)"/>
+    ${stars}${orb}${clouds}${rain}
+    <g>${cl}${cs}</g>
+    <text x="${bx+bw/2}" y="${by+bh+26}" text-anchor="middle" fill="#e7c46f" font-family="Jost,sans-serif" font-size="13" letter-spacing="6" opacity=".85">${conLabel}</text>
+    <!-- palm silhouettes -->
+    <g fill="#0c0814" opacity="${night?.9:.32}">
+      <path d="M70 ${H} q4-90 10-150 q-22 6-34-4 q24-2 36-14 q-20-8-26-26 q22 12 32 6 q-6-22 4-40 q10 18 8 40 q14-12 30-8 q-16 14-26 18 q18 0 30 12 q-22-2-36 6 q8 60 12 156z"/>
+      <path d="M930 ${H} q-4-80-9-134 q18 6 30-2 q-20-4-30-16 q18 8 28 2 q-6-18 2-34 q10 16 6 34 q14-10 26-6 q-14 12-24 16 q16 2 24 12 q-18-4-30 4 q6 70 9 124z"/>
+    </g>
+    <rect width="${W}" height="${H}" fill="url(#fade)"/>
+  </svg>`;
+  document.getElementById('sky-svg').innerHTML=svg;
+  document.querySelector('.sky-frame').classList.remove('loading');
+}
+function blend(a,b,t){
+  const pa=hex(a),pb=hex(b);
+  const r=Math.round(pa[0]+(pb[0]-pa[0])*t),g=Math.round(pa[1]+(pb[1]-pa[1])*t),bl=Math.round(pa[2]+(pb[2]-pa[2])*t);
+  return `rgb(${r},${g},${bl})`;
+}
+function hex(h){h=h.replace('#','');return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
+
+function renderWeatherText(){
+  const t=document.getElementById('temp');
+  t.innerHTML=`${WX.tempF}<sup>°F</sup>`;
+  document.getElementById('cond').textContent=CONDLABEL[WX.condition];
+  document.getElementById('condmeta').textContent=`High ${WX.hi}° · Low ${WX.lo}° · Feels ${WX.feelsF}°`;
+}
+
+/* ----------------------------------------------------------
+   5. OUTFIT LOGIC — weather band × zodiac personality
+---------------------------------------------------------- */
+function band(){const t=WX.tempF;if(t>=85)return'hot';if(t>=72)return'warm';if(t>=62)return'mild';if(t>=52)return'cool';return'cold';}
+const BANDHEAD={
+  hot:'a heat-wave edit', warm:'a peak-Los-Angeles afternoon', mild:'a layer-light kind of day',
+  cool:'a jacket-required cool spell', cold:'a cold front, by LA standards'
+};
+
+function buildLook(sign){
+  const b=band();
+  const wet = WX.condition==='rain'||WX.condition==='storm';
+  const p0=sign.palette[0][1].toLowerCase();
+  const shoes = wet ? 'Weatherproof leather boots' :
+    (b==='hot'?'Flat slides or barely-there sandals':
+     b==='warm'?'Clean white sneakers or low mules':
+     b==='mild'?'Loafers or canvas sneakers':
+     'Sturdy boots with a bit of attitude');
+  let look=[];
+  if(b==='hot'){
+    look=[
+      `A breathable ${sign.fabric} top in ${p0}`,
+      `Loose wide-leg trousers or a tailored short`,
+      `${cap(sign.hero)} — carried over the shoulder until sundown`,
+      shoes,
+    ];
+  }else if(b==='warm'){
+    look=[
+      `A relaxed ${sign.fabric} tee or shell in ${p0}`,
+      `Easy trousers, a midi skirt, or your best denim`,
+      `${cap(sign.hero)} as the one piece people remember`,
+      shoes,
+    ];
+  }else if(b==='mild'){
+    look=[
+      `A light ${sign.fabric} layer over a fitted base`,
+      `Full-length trousers or dark denim`,
+      `${cap(sign.hero)} — knotted on now, worn properly by evening`,
+      shoes,
+    ];
+  }else if(b==='cool'){
+    look=[
+      `A warm ${sign.fabric} knit close to the skin`,
+      `${cap(sign.hero)} layered over the top`,
+      `Long trousers; add a fine scarf in ${p0}`,
+      shoes,
+    ];
+  }else{
+    look=[
+      `A heavy ${sign.fabric} layer plus a thermal base`,
+      `${cap(sign.hero)}, buttoned all the way`,
+      `Wool trousers and warm socks — yes, in LA`,
+      shoes,
+    ];
+  }
+  if(wet) look.push('A sleek umbrella that matches, not clashes');
+  return look;
+}
+
+function directive(sign){
+  const b=band();
+  let weatherbit;
+  if(WX.condition==='clear') weatherbit = b==='hot'?'a brilliant, blazing sky':'wide-open sun';
+  else if(WX.condition==='clouds') weatherbit='a soft grey overhead';
+  else if(WX.condition==='fog') weatherbit='a hush of marine layer';
+  else if(WX.condition==='rain') weatherbit='rain on the boulevards';
+  else if(WX.condition==='storm') weatherbit='thunder over the hills';
+  else weatherbit='an unusual sky';
+  return `Today, ${sign.name}, Los Angeles hands you ${weatherbit} at ${WX.tempF}°. The almanac calls for ${BANDHEAD[b]} — so dress ${sign.vibe}.`;
+}
+
+function accessories(sign){
+  const list=[['Signature',sign.accessory]];
+  if(WX.condition==='clear') list.push(['Non-negotiable','Sunglasses — the LA passport']);
+  if(WX.condition==='rain'||WX.condition==='storm') list.push(['For the wet','A compact umbrella + closed shoes']);
+  if(WX.condition==='fog') list.push(['For the haze','A light scarf you can shed by noon']);
+  if(band()==='cold'||band()==='cool') list.push(['For warmth','A wrap you can drape, not bundle']);
+  if(band()==='hot') list.push(['For the heat','SPF, a wide brim, and cold water']);
+  return list;
+}
+
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+
+/* ----------------------------------------------------------
+   5b. ILLUSTRATED LOOK — vector croquis, weather-aware
+---------------------------------------------------------- */
+function tube(x1,y1,x2,y2,w,col){return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`;}
+function lighten(c,t){return blend(c,'#ffffff',t);}
+function darken(c,t){return blend(c,'#000000',t);}
+
+/* seeded variation (Art Blocks pattern) ----------------- */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};}
+function hashStr(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+
+const SKINS=['#f4d6bd','#e7bd97','#d3a279','#b5805a','#8d5a39','#5f3b25'];
+const HAIRCOLORS=[['#2a2330','Jet'],['#4a3526','Espresso'],['#7c4a28','Chestnut'],['#c79a4e','Honey'],['#9a3b2a','Auburn'],['#c2bcb4','Silver']];
+const HAIRSTYLES=['sleek','bob','bun','curls','crop','ponytail'];
+const HAIRLABEL={sleek:'Sleek',bob:'Bob',bun:'Updo',curls:'Curls',crop:'Crop',ponytail:'Ponytail'};
+
+/* persistent "person" — outfit changes per sign/weather, the model stays you */
+let LOOK={style:'glam',seed:7,skin:0,hairColor:0,hairStyle:0};
+function deriveLook(seed){
+  const r=mulberry32(seed>>>0);
+  return {skin:Math.floor(r()*SKINS.length),hairColor:Math.floor(r()*HAIRCOLORS.length),hairStyle:Math.floor(r()*HAIRSTYLES.length)};
+}
+Object.assign(LOOK,deriveLook(hashStr('angeleno')+1));
+
+/* hairstyles — return {back, front} relative to head at (130,72) */
+function buildHair(style,color,glam){
+  const dk=darken(color,.32), shine=glam?`<path d="M114,54 Q130,44 146,54" stroke="${lighten(color,.42)}" stroke-width="3" fill="none" opacity=".55" stroke-linecap="round"/>`:'';
+  const drapeL=`<path d="M107,116 C99,150 103,182 113,188 L120,182 C113,152 113,130 117,118 Z" fill="${color}"/>`;
+  let back='',front=shine;
+  if(style==='sleek'){
+    back=`<path d="M99,82 C99,46 161,46 161,82 C161,142 158,178 150,182 L110,182 C102,178 99,142 99,82 Z" fill="${color}"/>`;
+    front+=drapeL+`<path d="M130,47 L123,68 M130,47 L137,68" stroke="${dk}" stroke-width="2" fill="none" opacity=".5"/>`;
+  }else if(style==='bob'){
+    back=`<path d="M103,80 C103,48 157,48 157,80 C157,112 150,126 143,128 L117,128 C110,126 103,112 103,80 Z" fill="${color}"/>`;
+    front+=`<path d="M130,47 L124,66 M130,47 L136,66" stroke="${dk}" stroke-width="2" fill="none" opacity=".45"/>`;
+  }else if(style==='bun'){
+    back=`<path d="M104,78 C100,48 160,48 156,78 C150,62 110,62 104,78 Z" fill="${color}"/><ellipse cx="130" cy="41" rx="14" ry="12" fill="${color}"/><ellipse cx="130" cy="41" rx="14" ry="12" fill="none" stroke="${dk}" stroke-width="1.4" opacity=".4"/>`;
+  }else if(style==='curls'){
+    back=`<g fill="${color}"><circle cx="108" cy="60" r="18"/><circle cx="130" cy="45" r="20"/><circle cx="152" cy="60" r="18"/><circle cx="100" cy="86" r="16"/><circle cx="160" cy="86" r="16"/><circle cx="106" cy="116" r="14"/><circle cx="154" cy="116" r="14"/><circle cx="130" cy="39" r="15"/></g>`;
+    front+=`<circle cx="116" cy="55" r="9" fill="${color}"/><circle cx="144" cy="55" r="9" fill="${color}"/><circle cx="110" cy="150" r="12" fill="${color}"/><circle cx="112" cy="172" r="11" fill="${color}"/>`;
+  }else if(style==='crop'){
+    back=`<path d="M105,74 C103,49 157,49 155,74 C150,60 110,60 105,74 Z" fill="${color}"/>`;
+    front+=`<path d="M116,52 q14,-8 28,0" stroke="${dk}" stroke-width="2" fill="none" opacity=".35"/>`;
+  }else{ // ponytail
+    back=`<path d="M105,74 C103,49 157,49 155,74 C150,60 110,60 105,74 Z" fill="${color}"/><path d="M152,64 C180,82 182,134 170,176 C162,150 156,118 148,92 Z" fill="${color}"/><ellipse cx="151" cy="66" rx="6" ry="5" fill="${dk}"/>`;
+  }
+  return {back,front};
+}
+
+function buildFigure(sign){
+  const b=band();
+  const cond=WX.condition;
+  const wet=cond==='rain'||cond==='storm';
+  const clear=cond==='clear';
+  const glam=LOOK.style==='glam';
+  const skin=SKINS[LOOK.skin], hairCol=HAIRCOLORS[LOOK.hairColor][0];
+  const top=sign.palette[2][0], outer=sign.palette[0][0], accent=sign.palette[1][0];
+  const trouser=glam?darken(outer,.35):'#454f6b';
+
+  const hasOuter=b!=='hot';
+  const buttoned=b==='cold';
+  const longSleeveTop=(b!=='hot'&&b!=='warm');
+  const bottom=b==='hot'?'shorts':'trousers';
+  const shoe=(wet||b==='cool'||b==='cold')?'boots':(b==='hot'?'sandals':'sneakers');
+  const sunnies=clear, hat=b==='hot'&&clear, scarf=b==='cool'||b==='cold', bag=b==='hot';
+
+  /* proportion anchors (balanced ~7.5 heads; legs ≈ torso) */
+  const C=130;
+  const SHO=112;              // shoulder / torso top
+  const WAI=250;             // bodice hem
+  const HIP=254;             // legs origin
+  const WR=242, HND=246;     // wrist, hand
+  const L=440;               // feet baseline
+  const shadowY=L+18, vbH=L+34;
+  const coatLen=buttoned?HIP+162:(b==='cool'?HIP+108:HIP+50);
+  const shortsBot=HIP+76, bootTop=L-56;
+  let s='';
+
+  // background
+  if(glam){
+    s+=`<rect width="260" height="${vbH}" fill="url(#glambg)"/>`;
+    s+=`<circle cx="${C}" cy="112" r="110" fill="#f7d98a" opacity=".22"/>`;
+    s+=`<text x="${C}" y="${(L*0.72)|0}" text-anchor="middle" font-family="Fraunces,serif" font-size="300" fill="${outer}" opacity=".07">${sign.glyph}</text>`;
+  }else{
+    s+=`<rect width="260" height="${vbH}" fill="url(#minbg)"/>`;
+  }
+  // ground shadow
+  s+=`<ellipse cx="${C}" cy="${shadowY}" rx="64" ry="10" fill="#000000" opacity=".07"/>`;
+
+  // legs (skin) + feet
+  s+=tube(122,HIP,117,L,16,skin)+tube(138,HIP,143,L,16,skin);
+  s+=`<ellipse cx="113" cy="${L+2}" rx="11" ry="6" fill="${skin}"/><ellipse cx="147" cy="${L+2}" rx="11" ry="6" fill="${skin}"/>`;
+
+  // bottom
+  if(bottom==='shorts'){ s+=tube(122,WAI,120,shortsBot,18,trouser)+tube(138,WAI,140,shortsBot,18,trouser); }
+  else{ s+=tube(122,WAI,117,L-7,18,trouser)+tube(138,WAI,143,L-7,18,trouser); }
+
+  // shoes
+  if(shoe==='boots'){
+    s+=tube(117,bootTop,116,L-2,21,'#26212e')+tube(143,bootTop,144,L-2,21,'#26212e');
+    s+=`<ellipse cx="112" cy="${L+2}" rx="15" ry="8" fill="#26212e"/><ellipse cx="148" cy="${L+2}" rx="15" ry="8" fill="#26212e"/>`;
+    if(glam) s+=`<rect x="118" y="${L+5}" width="4" height="14" fill="#26212e"/><rect x="138" y="${L+5}" width="4" height="14" fill="#26212e"/>`;
+  }else if(shoe==='sneakers'){
+    if(glam){ const m=darken(accent,.08);
+      s+=`<path d="M102,${L-3} q-9,14 6,16 l26,2 q6,0 5,-7 q-2,-8 -9,-10 Z" fill="${m}"/>`;
+      s+=`<path d="M158,${L-3} q9,14 -6,16 l-26,2 q-6,0 -5,-7 q2,-8 9,-10 Z" fill="${m}"/>`;
+    }else{
+      s+=`<path d="M101,${L-4} q-5,13 11,15 l20,0 q6,0 6,-8 l0,-8 q-20,5 -37,9 Z" fill="#f1ede4" stroke="#d9d2c4"/>`;
+      s+=`<path d="M159,${L-4} q5,13 -11,15 l-20,0 q-6,0 -6,-8 l0,-8 q20,5 37,9 Z" fill="#f1ede4" stroke="#d9d2c4"/>`;
+    }
+  }else{ // sandals
+    s+=`<ellipse cx="113" cy="${L+2}" rx="12" ry="5" fill="${darken(skin,.16)}"/><ellipse cx="147" cy="${L+2}" rx="12" ry="5" fill="${darken(skin,.16)}"/>`;
+    s+=`<path d="M105,${L} l16,-5 M107,${L+4} l14,-2" stroke="${accent}" stroke-width="3" stroke-linecap="round" fill="none"/>`;
+    s+=`<path d="M139,${L} l16,5 M139,${L+4} l14,2" stroke="${accent}" stroke-width="3" stroke-linecap="round" fill="none"/>`;
+    if(glam) s+=`<path d="M120,${L+4} l-2,15 l4,0 l1,-14 Z" fill="${darken(accent,.2)}"/><path d="M140,${L+4} l2,15 l-4,0 l-1,-14 Z" fill="${darken(accent,.2)}"/>`;
+  }
+
+  // neck
+  s+=`<rect x="123" y="92" width="14" height="22" rx="6" fill="${skin}"/>`;
+  // arms (skin) + hands
+  s+=tube(112,114,100,WR,13,skin)+tube(148,114,160,WR,13,skin);
+  s+=`<circle cx="100" cy="${HND}" r="7.5" fill="${skin}"/><circle cx="160" cy="${HND}" r="7.5" fill="${skin}"/>`;
+
+  // hair (behind)
+  const hairP=buildHair(HAIRSTYLES[LOOK.hairStyle],hairCol,glam);
+  s+=hairP.back;
+
+  // torso top garment + sleeves
+  s+=`<path d="M104,114 C104,107 156,107 156,114 L150,${WAI} C150,${WAI+8} 110,${WAI+8} 110,${WAI} Z" fill="${top}"/>`;
+  if(longSleeveTop){ s+=tube(112,116,100,WR,13.5,top)+tube(148,116,160,WR,13.5,top); }
+  else{ s+=tube(112,116,103,166,13.5,top)+tube(148,116,157,166,13.5,top); }
+
+  // outer
+  if(hasOuter){
+    if(buttoned){
+      s+=`<path d="M100,112 C100,106 160,106 160,112 L156,${coatLen} L104,${coatLen} Z" fill="${outer}"/>`;
+      s+=`<line x1="${C}" y1="112" x2="${C}" y2="${coatLen}" stroke="${darken(outer,.25)}" stroke-width="2"/>`;
+    }else{
+      s+=`<path d="M100,112 C100,106 126,106 127,111 L126,${coatLen} L102,${coatLen} Z" fill="${outer}"/>`;
+      s+=`<path d="M160,112 C160,106 134,106 133,111 L134,${coatLen} L158,${coatLen} Z" fill="${outer}"/>`;
+      s+=`<path d="M127,111 L138,148 L130,148 Z" fill="${lighten(outer,.14)}"/>`;
+      s+=`<path d="M133,111 L122,148 L130,148 Z" fill="${lighten(outer,.14)}"/>`;
+    }
+    s+=tube(112,114,100,WR,15,outer)+tube(148,114,160,WR,15,outer);
+    s+=`<circle cx="100" cy="${HND}" r="7.5" fill="${skin}"/><circle cx="160" cy="${HND}" r="7.5" fill="${skin}"/>`;
+  }
+
+  // head
+  s+=`<ellipse cx="${C}" cy="72" rx="22" ry="27" fill="${skin}"/>`;
+  // hair (front strands / drape / shine)
+  s+=hairP.front;
+
+  // face
+  if(sunnies){
+    // sunglasses cover the eyes
+    s+=`<ellipse cx="121" cy="68" rx="8" ry="6" fill="#1d1d28"/><ellipse cx="139" cy="68" rx="8" ry="6" fill="#1d1d28"/><line x1="129" y1="67" x2="131" y2="67" stroke="#1d1d28" stroke-width="3"/>`;
+    if(glam) s+=`<path d="M126,89 q4,4 8,0 q-4,2.5 -8,0 Z" fill="#b5536a" opacity=".85"/>`;
+  }else{
+    // eyes (shown whenever she isn't wearing sunglasses)
+    s+=`<ellipse cx="121" cy="68" rx="3" ry="2.3" fill="#2a2330"/><ellipse cx="139" cy="68" rx="3" ry="2.3" fill="#2a2330"/>`;
+    if(glam){
+      s+=`<path d="M118,66 l-2.6,-1.6 M142,66 l2.6,-1.6" stroke="#2a2330" stroke-width="1.2" stroke-linecap="round"/>`;
+      s+=`<path d="M125,89 q5,4.5 10,0 q-5,3 -10,0 Z" fill="#b5536a" opacity=".85"/>`;
+    }else{
+      s+=`<path d="M126,87 q4,2.5 8,0" stroke="${darken(skin,.3)}" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".55"/>`;
+    }
+  }
+  // glam jewellery
+  if(glam){
+    s+=`<circle cx="107" cy="88" r="2.4" fill="#d4af37"/><line x1="107" y1="90" x2="107" y2="97" stroke="#d4af37" stroke-width="1.8"/><circle cx="107" cy="100" r="3.4" fill="#d4af37"/>`;
+    s+=`<circle cx="153" cy="88" r="2.4" fill="#d4af37"/><line x1="153" y1="90" x2="153" y2="97" stroke="#d4af37" stroke-width="1.8"/><circle cx="153" cy="100" r="3.4" fill="#d4af37"/>`;
+    if(!buttoned) s+=`<path d="M118,108 Q130,126 142,108" stroke="#d4af37" stroke-width="1.8" fill="none"/><circle cx="130" cy="124" r="3" fill="#d4af37"/>`;
+  }
+
+  // sunhat
+  if(hat){
+    s+=`<ellipse cx="${C}" cy="56" rx="48" ry="12" fill="#e3c98c"/>`;
+    s+=`<ellipse cx="${C}" cy="44" rx="22" ry="16" fill="#d8ba74"/>`;
+    s+=`<path d="M108,54 q22,8 44,0" stroke="${accent}" stroke-width="4" fill="none"/>`;
+  }
+  // scarf
+  if(scarf){
+    s+=`<path d="M112,104 q18,16 36,0 q2,10 -6,16 q-12,8 -24,0 q-8,-6 -6,-16 Z" fill="${accent}"/>`;
+    s+=`<path d="M126,118 l-6,38 l11,0 l4,-36 Z" fill="${accent}"/>`;
+  }
+  // bag (hot — carried hero)
+  if(bag){
+    s+=`<line x1="150" y1="114" x2="172" y2="232" stroke="${darken(outer,.2)}" stroke-width="4"/>`;
+    s+=`<rect x="158" y="228" width="34" height="28" rx="6" fill="${outer}"/>`;
+    s+=`<path d="M164,228 q11,-12 22,0" stroke="${darken(outer,.25)}" stroke-width="3" fill="none"/>`;
+    if(glam) s+=`<line x1="158" y1="242" x2="192" y2="242" stroke="#d4af37" stroke-width="2"/>`;
+  }
+
+  return `<svg viewBox="0 0 260 ${vbH}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrated ${sign.name} look for today's ${cond} weather, ${LOOK.style} style">
+    <defs>
+      <linearGradient id="minbg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="${lighten(top,.85)}"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+      <radialGradient id="glambg" cx="50%" cy="32%" r="62%">
+        <stop offset="0" stop-color="#fcefcf"/><stop offset="58%" stop-color="#f6ecd8"/><stop offset="100%" stop-color="#efe3cd"/></radialGradient>
+    </defs>
+    ${s}</svg>`;
+}
+
+/* figure control panel + handlers ----------------------- */
+function figureControls(){
+  const styleP=['minimal','glam'].map(st=>`<button class="pill${LOOK.style===st?' on':''}" onclick="setStyle('${st}')">${st==='minimal'?'Minimal':'Glam'}</button>`).join('');
+  const skinD=SKINS.map((c,i)=>`<button class="dot${LOOK.skin===i?' on':''}" style="background:${c}" title="Skin tone ${i+1}" aria-label="Skin tone ${i+1}" onclick="setSkin(${i})"></button>`).join('');
+  const hairD=HAIRCOLORS.map((c,i)=>`<button class="dot${LOOK.hairColor===i?' on':''}" style="background:${c[0]}" title="${c[1]}" aria-label="${c[1]} hair" onclick="setHairColor(${i})"></button>`).join('');
+  return `<div class="fig-controls">
+    <div class="fc-row fc-pills">${styleP}</div>
+    <div class="fc-row"><span class="fc-lab">Skin</span><span class="dots">${skinD}</span></div>
+    <div class="fc-row"><span class="fc-lab">Hair</span><span class="dots">${hairD}</span><button class="fc-cycle" onclick="cycleHair()" title="Change hairstyle">${HAIRLABEL[HAIRSTYLES[LOOK.hairStyle]]} &#8635;</button></div>
+    <button class="fc-surprise" onclick="surpriseLook()">&#10022; Surprise me</button>
+  </div>`;
+}
+function setStyle(s){LOOK.style=s;if(currentSign)renderReading(currentSign);}
+function setSkin(i){LOOK.skin=i;if(currentSign)renderReading(currentSign);}
+function setHairColor(i){LOOK.hairColor=i;if(currentSign)renderReading(currentSign);}
+function cycleHair(){LOOK.hairStyle=(LOOK.hairStyle+1)%HAIRSTYLES.length;if(currentSign)renderReading(currentSign);}
+function surpriseLook(){LOOK.seed=Math.floor(Math.random()*1e9);Object.assign(LOOK,deriveLook(LOOK.seed));if(currentSign)renderReading(currentSign);}
+const CONDWORD={clear:'Sunny',clouds:'Cloudy',fog:'Hazy',rain:'Rainy',storm:'Stormy',snow:'Snowy'};
+
+/* ----------------------------------------------------------
+   6. RENDER READING
+---------------------------------------------------------- */
+let currentSign=null;
+/* ----------------------------------------------------------
+   5c. SHOP THE LOOK — deep links to live retailer searches
+---------------------------------------------------------- */
+const RSHOPS=[
+  {n:'H&M',         t:'budget', u:q=>`https://www2.hm.com/en_us/search-results.html?q=${q}`},
+  {n:'ASOS',        t:'budget', u:q=>`https://www.asos.com/us/search/?q=${q}`},
+  {n:'Amazon',      t:'budget', u:q=>`https://www.amazon.com/s?k=${q}`},
+  {n:'Etsy',        t:'mid',    u:q=>`https://www.etsy.com/search?q=${q}`},
+  {n:"Macy's",      t:'mid',    u:q=>`https://www.macys.com/shop/search?keyword=${q}`},
+  {n:'Urban Outfitters',t:'mid',u:q=>`https://www.urbanoutfitters.com/search?q=${q}`},
+  {n:'Free People', t:'mid',    u:q=>`https://www.freepeople.com/search?q=${q}`},
+  {n:'Revolve',     t:'premium',u:q=>`https://www.revolve.com/r/Search.jsp?search=${q}`},
+  {n:'Nordstrom',   t:'premium',u:q=>`https://www.nordstrom.com/sr?keyword=${q}`},
+  {n:'Lululemon',   t:'premium',u:q=>`https://shop.lululemon.com/search?Ntt=${q}`},
+  {n:'NET-A-PORTER',t:'premium',u:q=>`https://www.net-a-porter.com/en-us/shop/search?keywords=${q}`},
+];
+const SHOPTIERS=[['all','All'],['budget','$ Budget'],['mid','$$ Mid'],['premium','$$$ Premium']];
+let SHOPTIER='all';
+let SHOPSTORE='ASOS';
+function storesInTier(){return RSHOPS.filter(r=>SHOPTIER==='all'||r.t===SHOPTIER);}
+function setShopTier(t){
+  SHOPTIER=t;
+  const inTier=storesInTier();
+  if(!inTier.some(r=>r.n===SHOPSTORE)) SHOPSTORE=inTier[0].n;
+  if(currentSign)renderReading(currentSign);
+}
+function setShopStore(n){SHOPSTORE=n;if(currentSign)renderReading(currentSign);}
+function stripArticle(s){return s.replace(/^(a |an |the )/i,'').trim();}
+function shopItems(sign){
+  const b=band(), wet=WX.condition==='rain'||WX.condition==='storm', clear=WX.condition==='clear', glam=LOOK.style==='glam';
+  const hero=stripArticle(sign.hero), acc=stripArticle(sign.accessory);
+  const heel=glam?'heeled ':'';
+  let items=[];
+  if(b==='hot'){
+    items=[['Breathable top','linen tank top'],['Tailored shorts','tailored shorts'],['Statement layer',hero],['Flat sandals',`${heel}leather sandals`]];
+  }else if(b==='warm'){
+    items=[['Relaxed tee','relaxed cotton tee'],['Easy trousers','wide leg trousers'],['Statement layer',hero],['Daytime shoes',glam?'pointed mule':'white leather sneakers']];
+  }else if(b==='mild'){
+    items=[['Light knit','lightweight knit top'],['Straight denim','straight leg jeans'],['Statement layer',hero],['Loafers','leather loafers']];
+  }else if(b==='cool'){
+    items=[['Warm knit','wool sweater'],['The coat',hero],['Fine scarf',`${sign.palette[1][1].toLowerCase()} scarf`],['Ankle boots','leather ankle boots']];
+  }else{
+    items=[['Chunky knit','chunky wool sweater'],['The coat',hero],['Wool trousers','wool trousers'],['Boots','leather boots']];
+  }
+  if(clear) items.push(['Sunglasses','oversized sunglasses']);
+  if(b==='hot'&&clear) items.push(['Sun hat','wide brim straw hat']);
+  if(wet) items.push(['Umbrella','compact travel umbrella']);
+  items.push(['Signature piece',acc]);
+  // de-dupe by query, cap to 6
+  const seen=new Set(); const out=[];
+  for(const [name,q] of items){ const k=q.toLowerCase(); if(seen.has(k))continue; seen.add(k); out.push({name,q}); if(out.length>=6)break; }
+  return out;
+}
+function renderShop(sign){
+  const items=shopItems(sign);
+  const stores=storesInTier();
+  const act=stores.find(r=>r.n===SHOPSTORE)||stores[0];
+  const tierPills=SHOPTIERS.map(([k,lab])=>`<button class="shop-pill${SHOPTIER===k?' on':''}" onclick="setShopTier('${k}')">${lab}</button>`).join('');
+  const storeChips=stores.map(r=>`<button class="store-chip${act.n===r.n?' on':''}" onclick="setShopStore('${r.n.replace(/'/g,"\\'")}')">${r.n}</button>`).join('');
+  const rows=items.map(it=>{
+    const url=act.u(encodeURIComponent(it.q));
+    return `<a class="shop-row" href="${url}" target="_blank" rel="noopener noreferrer">
+      <span class="shop-piece">${it.name}</span>
+      <span class="shop-q">&ldquo;${it.q}&rdquo;</span>
+      <span class="shop-go">${act.n} &#8599;</span>
+    </a>`;
+  }).join('');
+  return `<div class="shop">
+    <div class="shop-head">
+      <div class="shop-head-l">
+        <div class="mini-label">Shop the look</div>
+        <div class="shop-sub">Pick a store, then tap any piece to search it there. Not affiliated &middot; results shift with stock &amp; season.</div>
+      </div>
+      <div class="shop-filter" role="group" aria-label="Filter stores by budget">${tierPills}</div>
+    </div>
+    <div class="shop-stores"><span class="lab">Store</span>${storeChips}</div>
+    <div class="shop-list">${rows}</div>
+  </div>`;
+}
+
+function renderReading(sign){
+  currentSign=sign;
+  renderSky(); // update constellation in hero
+  const look=buildLook(sign);
+  const acc=accessories(sign);
+  const m=document.getElementById('reading-mount');
+  m.innerHTML=`
+   <article class="reading fade-up" aria-live="polite">
+     <div class="reading-head">
+       <div class="stamp" aria-hidden="true">${sign.glyph}</div>
+       <div class="kicker">Today's reading</div>
+       <h2>${sign.name}</h2>
+       <div class="sub">${sign.dateRange} &middot; <span class="elem-tag" style="margin-left:6px">${sign.element} sign</span></div>
+       <p class="directive">${directive(sign)}</p>
+     </div>
+     <div class="reading-body">
+       <div class="col-figure">
+         <div class="figure-panel">${buildFigure(sign)}</div>
+         <div class="figure-cap">Today's look &middot; ${cap(band())} &middot; ${CONDWORD[WX.condition]||cap(WX.condition)}</div>
+         ${figureControls()}
+       </div>
+       <div class="col-look">
+         <div class="mini-label">The look</div>
+         <ul class="look-list">
+           ${look.map(x=>`<li>${boldFirst(x)}</li>`).join('')}
+         </ul>
+       </div>
+       <div class="col-side">
+         <div class="side-block">
+           <div class="mini-label">Your palette</div>
+           <div class="palette">${sign.palette.map(p=>`<div class="swatch" style="background:${p[0]}"></div>`).join('')}</div>
+           <div class="pal-names">${sign.palette.map(p=>`<span><i style="background:${p[0]}"></i>${p[1]}</span>`).join('')}</div>
+         </div>
+         <div class="side-block">
+           <div class="mini-label">Finishing touches</div>
+           ${acc.map(a=>`<div class="accessory-line"><b>${a[0]}:</b><span>${a[1]}</span></div>`).join('')}
+         </div>
+         <div class="side-block">
+           <div class="mini-label">Styling note</div>
+           <p class="note script">${sign.philosophy}</p>
+         </div>
+       </div>
+     </div>
+     ${renderShop(sign)}
+   </article>`;
+  document.querySelectorAll('.sign-chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.key===sign.key));
+}
+function boldFirst(s){
+  // bold the leading garment phrase up to first " in " or end
+  return s.replace(/^(A |An )?([^,—]+)/,(m)=>`<b>${m}</b>`);
+}
+
+/* ----------------------------------------------------------
+   7. INIT
+---------------------------------------------------------- */
+function todaySign(){
+  const now=new Date(), mo=now.getMonth()+1, da=now.getDate();
+  for(const s of SIGNS){
+    const[m1,d1,m2,d2]=s.dates;
+    if(m1<=m2){ if((mo===m1&&da>=d1)||(mo===m2&&da<=d2)) return s; }
+    else { if((mo===m1&&da>=d1)||(mo===m2&&da<=d2)) return s; } // capricorn wrap
+  }
+  return SIGNS[4];
+}
+function fmtRange(s){
+  const M=['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${M[s.dates[0]]} ${s.dates[1]} – ${M[s.dates[2]]} ${s.dates[3]}`;
+}
+
+(function init(){
+  // dateline
+  const opts={weekday:'long',month:'long',day:'numeric',year:'numeric'};
+  document.getElementById('dateline').textContent=new Date().toLocaleDateString('en-US',opts);
+
+  // sign chips
+  const wrap=document.getElementById('signs');
+  SIGNS.forEach(s=>{
+    s.dateRange=fmtRange(s);
+    const b=document.createElement('button');
+    b.className='sign-chip';b.dataset.key=s.key;b.setAttribute('aria-pressed','false');
+    b.setAttribute('aria-label',`${s.name}, ${s.dateRange}`);
+    b.innerHTML=`<span class="glyph">${s.glyph}</span><span class="nm">${s.name}</span>`;
+    b.addEventListener('click',()=>renderReading(s));
+    wrap.appendChild(b);
+  });
+
+  loadWeather();
+  renderReading(todaySign()); // preselect today's sign
+})();
+</script>
+</body>
+</html>
